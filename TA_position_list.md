@@ -1,8 +1,7 @@
 ### Generate a list of all TA positions for a given organism.
 
-#### You can do this in any other 
 
-#### The following MATLAB commands will read a genome sequence in fasta format, find positions of all TA sites, and write the output to a txt file.
+#### The following MATLAB commands will read a genome sequence in fasta format, find positions of all TA sites, and write the output to a txt file. You can do this in your desired programming language.
 
 ```matlab
 reffasta=fastaread('ecoli.fasta');
