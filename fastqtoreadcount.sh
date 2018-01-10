@@ -25,7 +25,6 @@ module load hisat2
 basedr=~/Downloads/tnseqtemp
 
 
-#Place fasta & TAposition files from matlab output in reffiles folder within base directory
 reffasta=ReferenceOrganismGenome.fasta
 alignidxname="$(basename "${reffasta%.fasta*}")_idx"
 
