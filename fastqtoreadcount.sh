@@ -104,7 +104,7 @@ bawk_samposition='{ if($flag==0) print $pos+1; if($flag==16)  print $pos+length(
 
 parallel "bioawk -c sam '$bawk_samposition' {} | cut -f 1 | sort -g -k1 | uniq -c | sed 's/^ *//' | sort -b -k2 > $basedr/5_readfreqs/{/.}_readfreq.txt" ::: $basedr/4_alignfiles/*.sam
 #--------------------------------------------------------------------------
-# Map reads to TA positions
+# Map reads to valid TA positions
 
 parallel "join -1 2 -2 1 {} $basedr/reffiles/$TAgenemap | sort -n -r -k2 | tr ' ' '\t' > $basedr/6_mappedinserts/{/.}_mapped.txt" ::: $basedr/5_readfreqs/*_readfreq.txt
 
