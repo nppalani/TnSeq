@@ -5,8 +5,8 @@
 
 ```matlab
 reffasta=fastaread('ReferenceOrganismGenome.fasta'); % download from NCBI.
-TApositions = transpose(strfind(upper(reffasta.Sequence),'TA'))+1 ;
-writetable(TApositions,'Ref_org_TAposition.txt','WriteVariableNames',0,'delimiter','\t');
+TApositions = transpose(strfind(upper(reffasta.Sequence),'TA'))+1 ; % set position marker to A of TA.
+writetable(TApositions,'Ref_org_TAposition.txt','WriteVariableNames',0,'delimiter','\t'); % write to file.
 ```
 
 #### Sort the file alphabetically. 
