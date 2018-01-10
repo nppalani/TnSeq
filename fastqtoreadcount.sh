@@ -59,7 +59,7 @@ hisat2-build -f $basedr/reffiles/$reffasta $basedr/RefIndex/$alignidxname
 
 for seqfile in $basedr/*.fastq;
 do
-~/sw/bbmap/bbduk.sh -Xmx4g in="$seqfile" outm=$basedr/0_filter/"$(basename "${seqfile%_R1_001*}" )_filtered.fastq" literal=GGACTTATCAGCCAACCTGT k=20 hdist=3 rcomp=f maskmiddle=f
+bbduk.sh -Xmx4g in="$seqfile" outm=$basedr/0_filter/"$(basename "${seqfile%_R1_001*}" )_filtered.fastq" literal=GGACTTATCAGCCAACCTGT k=20 hdist=3 rcomp=f maskmiddle=f
 
 done
 #--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ done
 
 for seqfilefilt in $basedr/0_filter/*.fastq*;
 do
-~/sw/bbmap/bbduk.sh -Xmx4g in="$seqfilefilt" out=$basedr/1_cutadapt/"$(basename "${seqfilefilt%_filter*}" )_cutadapt.fastq" literal=GGACTTATCAGCCAACCTGT ktrim=l k=20 mink=11 hdist=3 rcomp=f
+bbduk.sh -Xmx4g in="$seqfilefilt" out=$basedr/1_cutadapt/"$(basename "${seqfilefilt%_filter*}" )_cutadapt.fastq" literal=GGACTTATCAGCCAACCTGT ktrim=l k=20 mink=11 hdist=3 rcomp=f
 
 done
 
@@ -78,7 +78,7 @@ done
 
 bawk_sizecut='{ print "@"$name" "$comment; print substr($seq,1,25); print "+"; print substr($qual,1,25);}'
 
-parallel "~/sw/bioawk/bioawk -c fastx '$bawk_sizecut' {} > $basedr/2_sizecut/{/.}_sizecut.fastq" ::: $basedr/1_cutadapt/*.fastq
+parallel "bioawk -c fastx '$bawk_sizecut' {} > $basedr/2_sizecut/{/.}_sizecut.fastq" ::: $basedr/1_cutadapt/*.fastq
 
 #--------------------------------------------------------------------------
 
@@ -86,7 +86,7 @@ parallel "~/sw/bioawk/bioawk -c fastx '$bawk_sizecut' {} > $basedr/2_sizecut/{/.
 
 bawk_keepta='{ if ($seq ~ /^TA/) { print "@"$name" "$comment; print $seq; print "+"; print $qual;}}'
 
-parallel "~/sw/bioawk/bioawk -c fastx '$bawk_keepta' {} > $basedr/3_TAonly/{/.}_TAonly.fastq" ::: $basedr/2_sizecut/*.fastq
+parallel "bioawk -c fastx '$bawk_keepta' {} > $basedr/3_TAonly/{/.}_TAonly.fastq" ::: $basedr/2_sizecut/*.fastq
 
 #--------------------------------------------------------------------------
 
@@ -103,7 +103,7 @@ done
 
 bawk_samposition='{ if($flag==0) print $pos+1; if($flag==16)  print $pos+length($seq)-1; }'
 
-parallel "~/sw/bioawk/bioawk -c sam '$bawk_samposition' {} | cut -f 1 | sort -g -k1 | uniq -c | sed 's/^ *//' | sort -b -k2 > $basedr/5_readfreqs/{/.}_readfreq.txt" ::: $basedr/4_alignfiles/*.sam
+parallel "bioawk -c sam '$bawk_samposition' {} | cut -f 1 | sort -g -k1 | uniq -c | sed 's/^ *//' | sort -b -k2 > $basedr/5_readfreqs/{/.}_readfreq.txt" ::: $basedr/4_alignfiles/*.sam
 #--------------------------------------------------------------------------
 # Map reads to TA positions
 
