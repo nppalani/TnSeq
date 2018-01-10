@@ -74,6 +74,7 @@ done
 #--------------------------------------------------------------------------
 
 #cut genomic junction sequences to length X bp -bioawk - change startposition & length in substr($seq,start,length)
+#change length to desired length -> 16 for MmeI, longer for TraDIS etc. Note that Q score drops as sequencing read length increases.
 
 bawk_sizecut='{ print "@"$name" "$comment; print substr($seq,1,25); print "+"; print substr($qual,1,25);}'
 
