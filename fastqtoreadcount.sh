@@ -31,7 +31,7 @@ alignidxname="$(basename "${reffasta%.fasta*}")_idx"
 TAgenemap=RefOrganism_TA_position.txt
 #Make sure to sort TA list alphabetically (shell command : sort -b )
 
-#hisat2 threads - set threadnum equal to number of processor cores available.
+#hisat2 threads - set threadnum equal to number of processor cores available / requested in PBS job.
 threadnum=20
 
 #sub-directories to be created for outputs
