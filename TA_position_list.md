@@ -1,0 +1,13 @@
+## Generate a list of all TA positions for a given organism.
+
+### The following MATLAB commands will read a genome sequence in fasta format, find positions of all TA sites, and write the output to a txt file.
+
+reffasta=fastaread('ecoli.fasta');
+TApositions = transpose(strfind(upper(reffasta.Sequence),'TA'))+1 ;
+writetable('Ref_org_TAposition.txt',TAmap,'WriteVariableNames',0,'delimiter','\t');
+
+### Sort the file alphabetically. 
+
+sort -b -k1 Ref_org_TAposition.txt > Ref_org_TAposition_sorted.txt
+
+### Use the sorted file with the fastqtoreads.sh script. 
