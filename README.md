@@ -1,6 +1,6 @@
 # TnSeq data analysis
 
-#### Now uploaded a version of the ['script'](https://github.com/nppalani/TnSeq/blob/master/fastqtoreadcount_umi.sh) to deduplicate reads using inline Unique Molecular Identifiers. Works with data generated using protocol at
+#### Now uploaded a version of the [script](https://github.com/nppalani/TnSeq/blob/master/fastqtoreadcount_umi.sh) to deduplicate reads using inline Unique Molecular Identifiers. Works with data generated using protocol at
 https://www.protocols.io/view/transposon-insertion-sequencing-tn-seq-library-pre-w9sfh6e
 
 #### Note that you need paired-end sequencing data for UMI-based deduplication. 
